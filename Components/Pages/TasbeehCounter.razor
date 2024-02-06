@@ -1,0 +1,67 @@
+﻿@page "/TasbeehCounter"
+<style>
+    .tasbeeh-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 200px; 
+    }
+
+    .tasbeeh {
+        width: 100px; 
+        height: 100px; 
+        background-color: #87CEEB; 
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        cursor: pointer;
+        transition: transform 0.5s ease;
+    }
+
+    .rotate {
+        transform: rotate(360deg);
+    }
+</style>
+<h3>Tasbeeh Counter</h3>
+<div class="tasbeeh-container">
+    <div class="@($"tasbeeh {"rotate"}")" @onclick="IncrementCount">
+        @($"{count} - {currentName}")
+    </div>
+</div>
+<button @onclick="ResetCount">Reset</button>
+
+@code {
+    private int count = 0;
+    private string currentName = "الله أكبر";
+
+    private void IncrementCount()
+    {
+        count++;
+
+        if (count <= 34)
+        {
+            currentName = "الله أكبر";
+        }
+        else if (count <= 67)
+        {
+            currentName = "ٱلْحَمْدُ لِلَّٰهِ";
+        }
+        else if (count <= 100)
+        {
+            currentName = "سُبْحَانَ ٱللَّٰهِ";
+        }
+
+        if (count == 100)
+        {
+            count = 0;
+        }
+    }
+
+    private void ResetCount()
+    {
+        count = 0;
+        currentName = "الله أكبر";
+    }
+}
